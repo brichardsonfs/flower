@@ -4,6 +4,7 @@ require(ggplot2)
 require(xlsx)
 require(doBy)
 require(MuMIn)
+require(lattice)
 
 fl11<- read.csv(file="fl11.csv", sep=",",head=TRUE, na.string="na")
 
@@ -96,7 +97,6 @@ y.hat4 <- model.matrix(flm5 , type = "fixed") %*% fixef(flm5)
 ####RANDOM EFFECTS
 re_pop <- ranef(flm5, condVar=TRUE, whichel = "pop:garden")
 re_garden <- ranef(flm5, condVar=TRUE, whichel = "garden")
-require(lattice)
 dotplot(re_pop)
 dotplot(re_garden)
 
