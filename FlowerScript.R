@@ -153,9 +153,15 @@ cor.test(~lat + re_pop2, data=fit_pop, subset=(garden=="Eph"))
 cor.test(~lat + re_pop2, data=fit_pop, subset=(garden=="Maj"))
 cor.test(~lat + re_pop2, data=fit_pop, subset=(garden=="Orch"))
 
-#LINEAR MODEL FOR ORCHARD GARDEN
-lm_orch <- lm(lat~re_pop2,data=slopeO)
+#LINEAR MODEL FOR GXE AND LATITUDE AT ORCHARD GARDEN
+slopeO <- subset(fit_pop, fit_pop$garden=="Orch")
+lm_orch <- lm(re_pop2~lat,data=slopeO)
 summary(lm_orch)
+slopeO <- cbind(slopeO,predict(lm_orch))
+
+###plot climatypes
+p<-ggplot(slopeO, aes(x=lat,y=observed.mean)) +  geom_point()
+p+ geom_errorbar(aes(ymax = observed.mean + 13 + predict(lm_orch), ymin = observed.mean - 13 - predict(lm_orch))) + theme_bw()
 
 ###Fig S1
 ###flsum is fit_pop with population removed that are na from one or more gardens
