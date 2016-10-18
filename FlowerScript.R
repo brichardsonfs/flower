@@ -9,7 +9,7 @@ require(grid)
 require(gridExtra)
 
 ##Dataset is Table S2
-fl11<- read.csv(file="fl11.csv", sep=",",head=TRUE, na.string="na")
+fl11<- read.csv(file="TableS2.csv", sep=",",head=TRUE, na.string="na")
 
 ###Dataframe with 21 variables and 20 interactions
 data_a=with(fl11, data.frame(
